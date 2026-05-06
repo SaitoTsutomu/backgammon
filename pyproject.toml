@@ -1,0 +1,58 @@
+[project]
+authors = [
+  {name = "Saito Tsutomu", email = "tsutomu.saito@moai-lab.jp"},
+]
+dependencies = [
+  "pgzero>=1.2.1",
+]
+description = "Add your description here"
+name = "backgammon"
+readme = "README.md"
+requires-python = ">=3.12"
+version = "0.1.0"
+
+[tool.taskipy.tasks]
+license = "uv run -w pip-licenses pip-licenses"
+lint = "pyrefly check src && ruff check src"
+pip-audit = "uv run -w pip-audit pip-audit"
+run = "uv run pgzrun src/backgammon/pgz_backgammon.py"
+test = "uv run pytest --disable-warnings"
+
+[tool.uv]
+exclude-newer = "3 days"
+
+[[tool.uv.index]]
+default = true
+url = "https://pypi.flatt.tech/simple/"
+
+[tool.pytest.ini_options]
+norecursedirs = ["nbs"]
+pythonpath = ["src"]
+
+[tool.ruff]
+src = ["src"]
+
+[tool.ruff.lint]
+ignore = [
+  "ANN401",
+  "CPY",
+  "D10",
+  "D203",
+  "D213",
+  "D400",
+  "D415",
+  "DOC",
+  "E501",
+]
+preview = true
+select = ["ALL"]
+
+[tool.ruff.lint.extend-per-file-ignores]
+"*/tests/*.py" = ["S101"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[build-system]
+build-backend = "uv_build"
+requires = ["uv_build>=0.11.8,<0.12.0"]
