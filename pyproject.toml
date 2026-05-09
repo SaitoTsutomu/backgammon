@@ -6,6 +6,8 @@ dependencies = [
   "pgzero>=1.2.1",
 ]
 description = "Add your description here"
+license = "Apache-2.0"
+license-files = ["LICENSE*"]
 name = "backgammon"
 readme = "README.md"
 requires-python = ">=3.12"
